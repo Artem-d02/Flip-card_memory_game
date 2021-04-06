@@ -2,11 +2,16 @@
 #include <iostream>
 #include <cstring>
 #include <mutex>
+#include <vector>
+#include <thread>
 #include "Game_objects.h"
 #include "SFML/Graphics.hpp"
 
 namespace svc
 {
+
+	constexpr size_t START_SIZE = 10;
+
 	enum Triple_string_arr_index
 	{
 		TEX_NAMES,
@@ -37,7 +42,20 @@ namespace svc
 	public:
 		Mutex_arr(const size_t, const size_t);
 		~Mutex_arr();
+		size_t get_x_count() const;
+		size_t get_y_count() const;
 		std::mutex* operator[](const size_t);
+	};
+
+	class Smart_lock_guard
+	{
+		bool is_created{ false };
+		std::mutex& mut;
+	public:
+		Smart_lock_guard(std::mutex&);
+		void lock();
+		void unlock();
+		~Smart_lock_guard();
 	};
 
 }	//	namespace svc

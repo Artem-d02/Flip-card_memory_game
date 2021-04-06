@@ -76,9 +76,43 @@ namespace svc
 		delete[] mutexes;
 	}
 
+	size_t Mutex_arr::get_x_count() const
+	{
+		return x_count;
+	}
+
+	size_t Mutex_arr::get_y_count() const
+	{
+		return y_count;
+	}
+
 	std::mutex* Mutex_arr::operator[](const size_t index)
 	{
 		return mutexes[index];
+	}
+
+	Smart_lock_guard::Smart_lock_guard(std::mutex& m)
+		: mut(m)
+	{}
+
+	void Smart_lock_guard::lock()
+	{
+		is_created = true;
+		mut.lock();
+	}
+
+	void Smart_lock_guard::unlock()
+	{
+		is_created = false;
+		mut.unlock();
+	}
+
+	Smart_lock_guard::~Smart_lock_guard()
+	{
+		if (is_created == true)
+		{
+			mut.unlock();
+		}
 	}
 
 }	//	namespace svc
