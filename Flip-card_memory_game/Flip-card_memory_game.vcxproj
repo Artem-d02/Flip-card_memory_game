@@ -143,12 +143,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game_main_screen.cpp" />
+    <ClCompile Include="Game_menu_screen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game_objects.cpp" />
     <ClCompile Include="Service.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game_main_screen.h" />
+    <ClInclude Include="Game_menu_screen.h" />
     <ClInclude Include="Game_objects.h" />
     <ClInclude Include="Service.h" />
   </ItemGroup>

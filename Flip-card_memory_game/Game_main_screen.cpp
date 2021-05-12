@@ -14,7 +14,7 @@ namespace gms
 {
 	const int STD_VALUE_FOR_ID_VECTOR = -1;
 
-	void execute_game(sf::RenderWindow&);
+	void execute_game(sf::RenderWindow&, int);
 	void initialization_texture_names(svc::Triple_string_arr&);
 	void smart_turn_over(gobj::Game_button&, std::mutex&, std::vector<int>&, std::mutex&, size_t*, std::mutex&, bool&);
 	void make_random_pair_array_of_string(std::string**, const size_t, const size_t);
@@ -183,18 +183,46 @@ namespace gms
 		make_random_pair_array_of_string(name_arr[svc::SEC_TEX_NAMES], name_arr.get_x_count(), name_arr.get_y_count());
 	}
 
-	void execute_game(sf::RenderWindow& window)
+	void execute_game(sf::RenderWindow& window, int code)
 	{
 		sf::Event event;
 		window.clear(sf::Color::Black);
-		
-		const int width_count = 4;
-		const int height_count = 4;
-		const size_t width_one = 200;
-		const size_t height_one = 100;
-		const size_t frame_widht = 5;
-		const size_t time_bar_w = width_count * width_one;
-		const size_t time_bar_h = 20;
+
+		int width_count = 4;
+		int height_count = 4;
+		size_t width_one = 200;
+		size_t height_one = 100;
+		size_t frame_widht = 5;
+		size_t time_bar_w = width_count * width_one;
+		size_t time_bar_h = 20;
+		int my_time = 0;
+
+		switch (code)
+		{
+		case 1:
+			width_count = 4;
+			height_count = 4;
+			width_one = 450;
+			height_one = 225;
+			my_time = 65;
+			break;
+		case 2:
+			width_count = 6;
+			height_count = 6;
+			width_one = 300;
+			height_one = 150;
+			my_time = 110;
+			break;
+		case 3:
+			width_count = 6;
+			height_count = 6;
+			width_one = 300;
+			height_one = 150;
+			my_time = 75;
+			break;
+		default:
+			break;
+		}
 
 		svc::Triple_string_arr tex_names_arr(width_count, height_count);
 		initialization_texture_names(tex_names_arr);
@@ -215,7 +243,7 @@ namespace gms
 		sf::Sprite time_bar_back_sprite(time_bar_back_tex);
 		sf::Sprite time_bar_sprite(time_bar_tex);
 
-		gobj::Time_bar my_time_bar(time_bar_w, time_bar_h, 0, time_bar_back_sprite, sf::Vector2i(0, 0), time_bar_sprite, 0, 45);		//	last is the time in sec
+		gobj::Time_bar my_time_bar(time_bar_w, time_bar_h, 0, time_bar_back_sprite, sf::Vector2i(0, 0), time_bar_sprite, 0, my_time);		//	last is the time in sec
 
 		size_t count_of_guessed_but = 0;
 

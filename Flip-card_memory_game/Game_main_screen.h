@@ -3,5 +3,5 @@
 
 namespace gms
 {
-	extern void execute_game(sf::RenderWindow&);
+	extern void execute_game(sf::RenderWindow&, int);
 }
