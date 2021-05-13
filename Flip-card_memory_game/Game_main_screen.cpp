@@ -193,8 +193,6 @@ namespace gms
 		size_t width_one = 200;
 		size_t height_one = 100;
 		size_t frame_widht = 5;
-		size_t time_bar_w = width_count * width_one;
-		size_t time_bar_h = 20;
 		int my_time = 0;
 
 		switch (code)
@@ -223,6 +221,9 @@ namespace gms
 		default:
 			break;
 		}
+
+		size_t time_bar_w = width_count * width_one;
+		size_t time_bar_h = 20;
 
 		svc::Triple_string_arr tex_names_arr(width_count, height_count);
 		initialization_texture_names(tex_names_arr);

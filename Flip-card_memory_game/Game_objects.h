@@ -7,13 +7,14 @@ static sf::Sprite std_sprite;
 
 namespace gobj
 {
-
+	// Flags to understand in which side to turn
 	enum Flags_for_turn
 	{
 		TURN_TO,
 		TURN_BACK
 	};
 
+	// Base class for object to drawing in window
 	class Table
 	{
 	protected:
@@ -26,9 +27,10 @@ namespace gobj
 		Table();
 		Table(const size_t, const size_t, const size_t, sf::Sprite&, const sf::Vector2i&);	//	whole width, whole height, frame_w
 		Table(sf::RenderWindow&, const size_t, const size_t, sf::Sprite&, const sf::Vector2i& = std_vect);					//	width_screen, heigth_screen
-		virtual void draw(sf::RenderWindow&) const;
+		virtual void draw(sf::RenderWindow&) const; // Draw object
 	};
 
+	// Class for the button on the grid
 	class Game_button : public Table
 	{
 		sf::Sprite& background;
@@ -42,13 +44,13 @@ namespace gobj
 		Game_button(const size_t, const size_t, const size_t, sf::Sprite&, sf::Sprite&, sf::Sprite&, const sf::Vector2i&, const int = 0);
 		Game_button(sf::RenderWindow&, const size_t, const size_t, sf::Sprite&, sf::Sprite&, sf::Sprite&, const sf::Vector2i& = std_vect, const int = 0);
 		Game_button(Game_button&&);
-		void draw_background(sf::RenderWindow&) const;
+		void draw_background(sf::RenderWindow&) const; 
 		void set_background(sf::Sprite&);
-		bool is_mouse_this(sf::RenderWindow&) const;
+		bool is_mouse_this(sf::RenderWindow&) const; // Returns true if mouse position on the button
 		void draw(sf::RenderWindow&) const;
 		void turn_over(sf::RenderWindow&);
-		void turn_over_parallel();
-		void turn_over_dx(Flags_for_turn);
+		void turn_over_parallel(); // Function for turn over for std::thread
+		void turn_over_dx(Flags_for_turn); // Support function for turn_over_parallel
 		void set_all_fields(const size_t, const size_t, const size_t, sf::Sprite&, sf::Sprite&, sf::Sprite&, const sf::Vector2i&, const size_t, const sf::Vector2i&, const int = 0);
 		void print_all_fields() const;
 		sf::Sprite& get_sprite() const;
@@ -57,6 +59,7 @@ namespace gobj
 		void make_disable_for_turn_over();
 	};
 
+	// Class that contains array of Game_button's
 	class Game_grid
 	{
 		Game_button** grid;
@@ -76,6 +79,7 @@ namespace gobj
 		Game_button* operator[](const int);
 	};
 
+	// Class to realize the time bar
 	class Time_bar : Table
 	{
 		sf::Sprite& time_sprite;

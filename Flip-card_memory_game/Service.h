@@ -19,6 +19,7 @@ namespace svc
 		BACK_TEX_NAMES
 	};
 
+	// this class realizes the array with three std::string
 	class Triple_string_arr
 	{
 		std::string** texture_names;
@@ -34,6 +35,7 @@ namespace svc
 		std::string** operator[](Triple_string_arr_index);
 	};
 
+	// this class realizes the array of mutexes
 	class Mutex_arr
 	{
 		std::mutex** mutexes;
@@ -47,6 +49,8 @@ namespace svc
 		std::mutex* operator[](const size_t);
 	};
 
+
+	// this class realizes the additional to class std::lock_guard for having opportunity to check the state of mutex
 	class Smart_lock_guard
 	{
 		bool is_created{ false };
